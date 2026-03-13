@@ -43,42 +43,42 @@
 }
 
 :root {
-  /* ReStart AI Design Tokens: Modern Minimalism with Warm Accents */
-  /* Primary: Deep Teal (#0D6B7D) - Trust, growth, forward-looking */
-  /* Accent: Warm Coral (#E8765A) - Optimism, energy, human-centered */
-  --primary: #0D6B7D;
-  --primary-foreground: #F9F7F4;
-  --sidebar-primary: #0D6B7D;
-  --sidebar-primary-foreground: #F9F7F4;
-  --chart-1: #0D6B7D;
-  --chart-2: #E8765A;
-  --chart-3: #0D6B7D;
-  --chart-4: #E8765A;
-  --chart-5: #0D6B7D;
+  /* ReStart AI Design Tokens: Code for Her Hackathon Theme */
+  /* Primary: Hot Pink/Cerise (#DD4A76) - Feminine, bold, energetic */
+  /* Accent: Deep Berry/Crimson (#960E3A) - Strong, professional, grounding */
+  --primary: #DD4A76;
+  --primary-foreground: #FFFFFF;
+  --sidebar-primary: #DD4A76;
+  --sidebar-primary-foreground: #FFFFFF;
+  --chart-1: #DD4A76;
+  --chart-2: #960E3A;
+  --chart-3: #F4ACC2;
+  --chart-4: #A7174A;
+  --chart-5: #5B0D28;
   --radius: 0.75rem;
-  --background: #F9F7F4;
-  --foreground: #2C2C2C;
+  --background: #FCEEF0; /* Soft pink-cream */
+  --foreground: #2C0E1A; /* Dark maroon/gray */
   --card: #FFFFFF;
-  --card-foreground: #2C2C2C;
+  --card-foreground: #2C0E1A;
   --popover: #FFFFFF;
-  --popover-foreground: #2C2C2C;
-  --secondary: #E8765A;
+  --popover-foreground: #2C0E1A;
+  --secondary: #960E3A;
   --secondary-foreground: #FFFFFF;
-  --muted: #E8E6E1;
-  --muted-foreground: #6B6B6B;
-  --accent: #E8765A;
+  --muted: #F4ACC2;
+  --muted-foreground: #A7174A;
+  --accent: #960E3A;
   --accent-foreground: #FFFFFF;
   --destructive: #DC2626;
   --destructive-foreground: #FFFFFF;
-  --border: #E8E6E1;
+  --border: #F4ACC2;
   --input: #FFFFFF;
-  --ring: #0D6B7D;
+  --ring: #DD4A76;
   --sidebar: #FFFFFF;
-  --sidebar-foreground: #2C2C2C;
-  --sidebar-accent: #E8765A;
+  --sidebar-foreground: #2C0E1A;
+  --sidebar-accent: #960E3A;
   --sidebar-accent-foreground: #FFFFFF;
-  --sidebar-border: #E8E6E1;
-  --sidebar-ring: #0D6B7D;
+  --sidebar-border: #F4ACC2;
+  --sidebar-ring: #DD4A76;
 }
 
 .dark {
@@ -155,22 +155,65 @@
     min-width: 0;
   }
 
-  /* ReStart AI Custom Components */
+  /* ReStart AI Custom Premium Utilities */
   .gradient-divider {
-    background: linear-gradient(to right, #0D6B7D, #E8765A);
+    background: linear-gradient(to right, var(--color-primary), var(--color-accent));
     height: 2px;
   }
 
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_0_rgba(13,107,125,0.07)] rounded-2xl;
+  }
+  
+  .dark .glass-card {
+    @apply bg-black/40 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] rounded-2xl;
+  }
+
+  .premium-text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-[#118a99] to-accent;
+  }
+
   .card-hover {
-    @apply transition-all duration-300 hover:shadow-lg hover:scale-105;
+    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-accent/30;
   }
 
   .btn-primary {
-    @apply bg-primary text-primary-foreground transition-all duration-300;
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300;
   }
 
   .btn-secondary {
-    @apply bg-accent text-accent-foreground transition-all duration-300;
+    @apply bg-accent text-accent-foreground hover:bg-accent/90 hover:shadow-lg hover:shadow-accent/20 transition-all duration-300;
+  }
+
+  /* Animated Mesh Gradient Background */
+  .mesh-bg {
+    background-color: #f9f7f4;
+    background-image: 
+      radial-gradient(at 80% 0%, hsla(188,81%,27%,0.15) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, hsla(12,75%,63%,0.15) 0px, transparent 50%),
+      radial-gradient(at 80% 100%, hsla(188,81%,27%,0.1) 0px, transparent 50%),
+      radial-gradient(at 0% 0%, hsla(12,75%,63%,0.1) 0px, transparent 50%);
+    animation: mesh-flow 15s ease-in-out infinite alternate;
+  }
+
+  @keyframes mesh-flow {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+  }
+
+  /* Floating Animation for Hero Elements */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-float-delayed {
+    animation: float 6s ease-in-out 3s infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
   }
 
   @media (min-width: 640px) {
@@ -188,3 +231,4 @@
     }
   }
 }
+

@@ -69,8 +69,12 @@ export default function Wizard() {
   };
 
   return (
-    <div className="min-h-screen bg-background py-12 px-4">
-      <div className="max-w-2xl mx-auto">
+    <div className="min-h-screen mesh-bg relative flex flex-col justify-center py-12 px-4 overflow-hidden z-0">
+      {/* Decorative background blurs */}
+      <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-primary/20 rounded-full blur-3xl animate-float opacity-50 pointer-events-none -z-10" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-accent/20 rounded-full blur-3xl animate-float-delayed opacity-50 pointer-events-none -z-10" />
+
+      <div className="w-full max-w-2xl mx-auto z-10">
         {/* Header */}
         <div className="mb-12">
           <button
@@ -96,18 +100,18 @@ export default function Wizard() {
               {Math.round((step / totalSteps) * 100)}%
             </span>
           </div>
-          <div className="w-full bg-border rounded-full h-2 overflow-hidden">
+          <div className="w-full bg-white/40 backdrop-blur-sm border border-white/50 rounded-full h-3 overflow-hidden shadow-inner">
             <motion.div
-              className="h-full bg-gradient-to-r from-primary to-accent"
+              className="h-full bg-gradient-to-r from-primary via-[#118a99] to-accent relative"
               initial={{ width: 0 }}
               animate={{ width: `${(step / totalSteps) * 100}%` }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
             />
           </div>
         </div>
 
         {/* Form Steps */}
-        <div className="bg-card rounded-xl p-8 border border-border mb-8">
+        <div className="glass-card p-8 md:p-12 mb-8 relative">
           {/* Step 1: Previous Role */}
           {step === 1 && (
             <motion.div
@@ -128,7 +132,7 @@ export default function Wizard() {
                     placeholder="e.g., Marketing Manager, Senior Developer"
                     value={formData.previousRole}
                     onChange={(e) => handleInputChange('previousRole', e.target.value)}
-                    className="text-lg py-3"
+                    className="text-lg py-6 px-4 bg-white/60 backdrop-blur-sm focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:border-accent transition-all duration-300 rounded-xl"
                   />
                 </div>
                 <div>
@@ -139,7 +143,7 @@ export default function Wizard() {
                     value={formData.yearsExperience.toString()}
                     onValueChange={(value) => handleInputChange('yearsExperience', parseInt(value))}
                   >
-                    <SelectTrigger className="text-lg py-3">
+                    <SelectTrigger className="text-lg py-6 px-4 bg-white/60 backdrop-blur-sm focus:ring-2 focus:ring-accent/50 transition-all duration-300 rounded-xl">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -174,7 +178,7 @@ export default function Wizard() {
                     value={formData.breakDuration.toString()}
                     onValueChange={(value) => handleInputChange('breakDuration', parseInt(value))}
                   >
-                    <SelectTrigger className="text-lg py-3">
+                    <SelectTrigger className="text-lg py-6 px-4 bg-white/60 backdrop-blur-sm focus:ring-2 focus:ring-accent/50 transition-all duration-300 rounded-xl">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -191,7 +195,7 @@ export default function Wizard() {
                     Reason for break (optional)
                   </Label>
                   <Select value={formData.breakReason} onValueChange={(value) => handleInputChange('breakReason', value)}>
-                    <SelectTrigger className="text-lg py-3">
+                    <SelectTrigger className="text-lg py-6 px-4 bg-white/60 backdrop-blur-sm focus:ring-2 focus:ring-accent/50 transition-all duration-300 rounded-xl">
                       <SelectValue placeholder="Select a reason" />
                     </SelectTrigger>
                     <SelectContent>
@@ -228,7 +232,7 @@ export default function Wizard() {
                     placeholder="e.g., Senior Marketing Manager, Product Manager"
                     value={formData.targetRole}
                     onChange={(e) => handleInputChange('targetRole', e.target.value)}
-                    className="text-lg py-3"
+                    className="text-lg py-6 px-4 bg-white/60 backdrop-blur-sm focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:border-accent transition-all duration-300 rounded-xl"
                   />
                 </div>
                 <div>
@@ -236,7 +240,7 @@ export default function Wizard() {
                     Preferred Work Style *
                   </Label>
                   <Select value={formData.workStyle} onValueChange={(value) => handleInputChange('workStyle', value)}>
-                    <SelectTrigger className="text-lg py-3">
+                    <SelectTrigger className="text-lg py-6 px-4 bg-white/60 backdrop-blur-sm focus:ring-2 focus:ring-accent/50 transition-all duration-300 rounded-xl">
                       <SelectValue placeholder="Select work style" />
                     </SelectTrigger>
                     <SelectContent>
@@ -253,27 +257,27 @@ export default function Wizard() {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex gap-4 justify-between">
+        <div className="flex gap-4 justify-between items-center z-10 relative mt-4">
           <Button
             variant="outline"
             onClick={handlePrevious}
             disabled={step === 1}
-            className="px-6 py-3 text-base"
+            className="rounded-full px-8 py-6 text-base font-semibold bg-white/50 border-white/60 hover:bg-white/80 backdrop-blur-sm transition-all duration-300 shadow-sm"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Previous
           </Button>
 
           {step < totalSteps ? (
-            <Button onClick={handleNext} className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 text-base">
+            <Button onClick={handleNext} className="btn-primary rounded-full px-10 py-6 text-base font-bold shadow-xl shadow-primary/20">
               Next
-              <ArrowRight className="w-4 h-4 ml-2" />
+              <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           ) : (
             <Button
               onClick={handleSubmit}
               disabled={isLoading}
-              className="bg-accent hover:bg-accent/90 text-accent-foreground px-8 py-3 text-base font-semibold"
+              className="btn-secondary rounded-full px-10 py-6 text-base font-bold shadow-xl shadow-accent/20"
             >
               {isLoading ? (
                 <>
@@ -293,10 +297,12 @@ export default function Wizard() {
         {/* Loading Message */}
         {isLoading && (
           <motion.div
-            className="mt-8 p-6 bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl border border-primary/20"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
+            className="mt-8 p-6 glass-card bg-gradient-to-r from-primary/5 to-accent/5 relative overflow-hidden"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
           >
+            {/* Shimmer overlay for loading */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-[100%] animate-[shimmer_2s_infinite]" />
             <div className="flex items-center gap-3">
               <Loader2 className="w-5 h-5 animate-spin text-accent" />
               <div>
